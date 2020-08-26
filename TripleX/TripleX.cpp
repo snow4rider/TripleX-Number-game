@@ -20,7 +20,24 @@ int main()
 	cout << "\t- The sum of the three numbers is " << CodeSum << ".\n";
 	cout << "\t- The product of the three numbers is " << CodeProduct << "." << endl;
 
-	int PlayerGuess;
+	int GuessA, GuessB, GuessC;
+
+	cin >> GuessA;
+	cin >> GuessB;
+	cin >> GuessC;
+
+	int GuessSum = GuessA + GuessB + GuessC;
+	int GuessProduct = GuessA * GuessB * GuessC;
+
+	if (GuessSum == CodeSum && GuessProduct == CodeProduct)
+	{
+		cout << "you win";
+	}
+	else
+	{
+		cout << "you lose!";
+	}
+
 
 	return 0;
 }
