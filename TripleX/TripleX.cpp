@@ -5,14 +5,14 @@ using namespace std;
 void PrintIntroduction()
 {
 	// Print welcome messages to the terminal
-	cout << "****************************************************************\n";
+	cout << "\n****************************************************************\n";
 	cout << "* You are a secret agent breaking into a secure server room... *\n";
 	cout << "* Enter the correct code to continue...                        *\n";
 	cout << "****************************************************************\n";
 }
 
 
-void PlayGame()
+bool PlayGame()
 {
 	PrintIntroduction();
 
@@ -33,11 +33,11 @@ void PlayGame()
 	// check if the player guessed correctly 
 	if (GuessSum == CodeSum && GuessProduct == CodeProduct)
 	{
-		cout << "you win\n";
+		return true;
 	}
 	else
 	{
-		cout << "you lose!\n";
+		return false;
 	}
 }
 
@@ -46,10 +46,18 @@ void PlayGame()
 
 int main() 
 {
-	int difficulty = 1;
-	int maxDifficulty = 10;
+	int Difficulty = 1;
+	int MaxDifficulty = 3;
 
-	PlayGame();
+	while (Difficulty < MaxDifficulty)
+	{
+		bool bLevelComplete = PlayGame();
+		cin.clear(); // Clears any errors
+		cin.ignore(); // Discards the buffer
+		Difficulty++;
+	}
+
+	cout << "You are in the system!!\n";
 
 	return 0;
 }
