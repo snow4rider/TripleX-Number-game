@@ -2,19 +2,20 @@
 #include <ctime>
 using namespace std;
 
-void PrintIntroduction()
+void PrintIntroduction(int Difficulty)
 {
 	// Print welcome messages to the terminal
 	cout << "\n****************************************************************\n";
-	cout << "* You are a secret agent breaking into a secure server room... *\n";
+	cout << "* You are a secret agent breaking into a level " << Difficulty;
+	cout << " secure server room... *\n";
 	cout << "* Enter the correct code to continue...                        *\n";
 	cout << "****************************************************************\n";
 }
 
 
-bool PlayGame()
+bool PlayGame(int Difficulty)
 {
-	PrintIntroduction();
+	PrintIntroduction(Difficulty);
 
 	const int CodeA = 4, CodeB = 3, CodeC = 2;
 	const int CodeSum = CodeA + CodeB + CodeC, CodeProduct = CodeA * CodeB * CodeC;
@@ -46,15 +47,19 @@ bool PlayGame()
 
 int main() 
 {
-	int Difficulty = 1;
+	int LevelDifficulty = 1;
 	int MaxDifficulty = 3;
 
-	while (Difficulty < MaxDifficulty)
+	while (LevelDifficulty < MaxDifficulty)
 	{
-		bool bLevelComplete = PlayGame();
+		bool bLevelComplete = PlayGame(LevelDifficulty);
 		cin.clear(); // Clears any errors
 		cin.ignore(); // Discards the buffer
-		Difficulty++;
+
+		if (bLevelComplete)
+		{
+			++LevelDifficulty;
+		}
 	}
 
 	cout << "You are in the system!!\n";
