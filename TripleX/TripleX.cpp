@@ -5,11 +5,11 @@ using namespace std;
 void PrintIntroduction(int Difficulty)
 {
 	// Print welcome messages to the terminal
-	cout << "\n****************************************************************\n";
-	cout << "* You are a secret agent breaking into a level " << Difficulty;
-	cout << " secure server room... *\n";
-	cout << "* Enter the correct code to continue...                        *\n";
-	cout << "****************************************************************\n";
+	cout << "\n=====================================================================\n";
+	cout << "= You are a secret agent breaking into a level " << Difficulty;
+	cout << " secure server room... =\n";
+	cout << "= Enter the correct code to continue...                                =\n";
+	cout << "========================================================================\n";
 }
 
 
@@ -17,7 +17,10 @@ bool PlayGame(int Difficulty)
 {
 	PrintIntroduction(Difficulty);
 
-	const int CodeA = 4, CodeB = 3, CodeC = 2;
+	const int CodeA = rand() % Difficulty + Difficulty;
+	const int CodeB = rand() % Difficulty + Difficulty;
+	const int CodeC = rand() % Difficulty + Difficulty;
+
 	const int CodeSum = CodeA + CodeB + CodeC, CodeProduct = CodeA * CodeB * CodeC;
 
 	// Print the sum and product of the numbers
@@ -34,10 +37,12 @@ bool PlayGame(int Difficulty)
 	// check if the player guessed correctly 
 	if (GuessSum == CodeSum && GuessProduct == CodeProduct)
 	{
+		cout << "\n---- Well done agent! You have extracted a file. Keep going! ----\n";
 		return true;
 	}
 	else
 	{
+		cout << "\n---- You entered the wrong code! Try again! ----\n";
 		return false;
 	}
 }
@@ -47,10 +52,12 @@ bool PlayGame(int Difficulty)
 
 int main() 
 {
-	int LevelDifficulty = 1;
-	int MaxDifficulty = 3;
+	srand(time(NULL)); // Create new random sequence based on time of day
 
-	while (LevelDifficulty < MaxDifficulty)
+	int LevelDifficulty = 1;
+	const int MaxDifficulty = 3;
+
+	while (LevelDifficulty <= MaxDifficulty) // loop all the levels until all levels completed 
 	{
 		bool bLevelComplete = PlayGame(LevelDifficulty);
 		cin.clear(); // Clears any errors
@@ -58,11 +65,11 @@ int main()
 
 		if (bLevelComplete)
 		{
-			++LevelDifficulty;
+			LevelDifficulty++;
 		}
 	}
 
-	cout << "You are in the system!!\n";
+	cout << "\n Great work agent you are in the system!!\n";
 
 	return 0;
 }
